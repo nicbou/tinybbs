@@ -1,0 +1,5 @@
+.forum{width:600px;font:16px sans-serif}
+    ul{list-style:none;padding:0;margin:20px 0 0}
+        li{border:1px solid #aaa;padding:20px 20px 0;margin:20px 0 20px}
+            p{margin-top:0}
+                textarea{width:100%}
