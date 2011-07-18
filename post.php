@@ -6,7 +6,7 @@ class Post {
 	private $id;
 	private $date;
 	function __construct($msg,$parent,$id=NULL,$date=NULL){
-		$this->msg=$msg;
+		$this->setMessage($msg);
 		$this->setParent($parent);
 		if($id!=NULL)$this->setId($id);
 		if($date!=NULL)$this->setDate($date);
@@ -19,6 +19,9 @@ class Post {
 			$this->parent=$parent;
 		else
 			throw new Exception("Can't assign parent to non-numeric value", '100');
+	}
+	function setMessage($msg){
+		$this->msg=$msg;
 	}
 	function setId($id){
 		if(is_numeric($id) && !is_float($id) && $id >=0)
