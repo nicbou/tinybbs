@@ -4,7 +4,7 @@ require_once('post.php');
 
 class Forum{
 	private $parent=0;
-	private $js='<script>function reply(parent){var forms=parent.parentNode.getElementsByTagName("form");forms[0].style.display="block";parent.style.display="none";}</script>';
+	private $js='<script>document.forms[0].style.display="block";function reply(parent){var forms=parent.parentNode.getElementsByTagName("form");forms[0].style.display="block";parent.style.display="none";}</script>';
 	function __construct($echo=1,$id=0,$newreply=NULL){
 		$this->parent=isset($_GET['id'])&&is_numeric($_GET['id'])&&!is_float($_GET['id'])&&$_GET['id']>=0?$_GET['id']:0;
 		if(isset($_POST['msg'])&&isset($_POST['parent']))
@@ -23,7 +23,7 @@ class Forum{
 		$output='';
 		foreach($posts as $post){
 			$output .='<li>
-			<a class="id" name='.$post['post']->getId().'></a>
+			<a id="'.$post['post']->getId().'"></a>
 			<p>'.htmlentities($post['post']->getMessage(),ENT_NOQUOTES,"UTF-8").'</p>'
 			.$this->makeReplyForm($post['post']->getId()).
 			'<a href=\'?id='.$post['post']->getParent().'#'.$post['post']->getId().'\'>Permalink</a><a onclick="reply(this)">Reply</a>'
@@ -34,7 +34,7 @@ class Forum{
 		return $output;
 	}
 	private function makeReplyForm($id){
-		return "<form action='#$id' method='POST'><input type='hidden' name='parent' value='$id'/><textarea name='msg'></textarea><input type='submit' value='Submit'/></form>";
+		return "<form action='#$id' method='POST'><input type='hidden' name='parent' value='$id'/><textarea required name='msg'></textarea><input type='submit' value='Submit'/></form>";
 	}
 	private function fetchSubposts($parent=0){
 		$node=array();
