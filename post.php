@@ -1,5 +1,5 @@
 <?php
-require_once('db.class.php');
+require_once('db.php');
 class Post {
 	private $msg;
 	private $parent;
@@ -29,8 +29,8 @@ class Post {
 	function setDate($date){
 		$this->date=$date;
 	}
-	function getParent($escape=false){return ($escape ? Database::getInstance()->getHandle()->real_escape_string(($this->parent)) : $this->parent);}
-	function getMessage($escape=false){return ($escape ? Database::getInstance()->getHandle()->real_escape_string(($this->msg)) : $this->msg);}
+	function getParent($escape=false){return($escape?Database::getInstance()->getHandle()->real_escape_string(($this->parent)):$this->parent);}
+	function getMessage($escape=false){return($escape?Database::getInstance()->getHandle()->real_escape_string(($this->msg)):$this->msg);}
 	function getId(){return $this->id;}
 	function getDate(){return $this->date;}
 }

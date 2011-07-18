@@ -1,5 +1,5 @@
 <?php
-class Database {
+class Database{
 	private static $instance;
 	private $handle;
 	private function __construct(){
@@ -35,4 +35,4 @@ class Database {
 			throw new Exception('Can\'t fetch posts from the DB: '.$this->handle->error,$this->handle->errno);
 		return $this->handle->insert_id;
 	}
-}?>
+}
