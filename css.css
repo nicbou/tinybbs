@@ -2,8 +2,9 @@
 .err{background:#faa}
 .ex{background:#ffa}
 ul{list-style:none;padding:0;margin:20px 0 0}
-li{border:1px solid #aaa;padding:20px 20px 0;margin:20px 0}
+li{border:1px solid #ddd;padding:20px 20px 0;margin:20px 0;overflow:hidden}
 p{margin-top:0}
-a{text-decoration:underline;color:#33A;cursor:pointer;margin:0 10px 0 0}
-form,.id{margin:0;display:none}
+a{text-decoration:none;color:#aaf;font-size:80%;cursor:pointer;margin:0 10px 0 0}
+a:hover{color:#33a}
+form,.id{margin:0 0 20px;display:none}
 textarea{width:100%;height:70px}
