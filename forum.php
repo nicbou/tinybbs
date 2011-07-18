@@ -1,7 +1,10 @@
 <?php
+function handleErr($no,$msg,$file,$line){echo("<div class='err'>".htmlentities("$msg in $file ($line)")."</div>");return true;}
+function handleEx($ex){echo("<div class='ex'>".htmlentities($ex->getMessage())."</div>");return true;}
+set_error_handler('handleErr');
+set_exception_handler('handleEx');
 require_once('db.php');
 require_once('post.php');
-
 class Forum{
 	private $parent=0;
 	private $js='<script>document.forms[0].style.display="block";function reply(parent){var forms=parent.parentNode.getElementsByTagName("form");forms[0].style.display="block";parent.style.display="none";}</script>';
@@ -23,7 +26,7 @@ class Forum{
 		$output='';
 		foreach($posts as $post){
 			$output .='<li>
-			<a id="'.$post['post']->getId().'"></a>
+			<a class="id" id="'.$post['post']->getId().'"></a>
 			<p>'.htmlentities($post['post']->getMessage(),ENT_NOQUOTES,"UTF-8").'</p>'
 			.$this->makeReplyForm($post['post']->getId()).
 			'<a href=\'?id='.$post['post']->getParent().'#'.$post['post']->getId().'\'>Permalink</a><a onclick="reply(this)">Reply</a>'
