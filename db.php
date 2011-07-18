@@ -24,8 +24,8 @@ class Database{
 	}
 	public function addPost(Post $post){
 		$query=$this->handle->prepare('INSERT INTO posts (parent_id,message) VALUES (?,?);');
-		$query->bindParam(1,$post->getParent(),PDO::PARAM_INT);
-		$query->bindParam(2,$post->getMessage(),PDO::PARAM_STR);
+		$query->bindValue(1,$post->getParent(),PDO::PARAM_INT);
+		$query->bindValue(2,$post->getMessage(),PDO::PARAM_STR);
 		$query->execute();
 		return $this->handle->lastInsertId();
 	}
