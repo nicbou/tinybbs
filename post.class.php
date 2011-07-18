@@ -33,4 +33,4 @@ class Post {
 	function getMessage($escape=false){return ($escape ? Database::getInstance()->getHandle()->real_escape_string(($this->msg)) : $this->msg);}
 	function getId(){return $this->id;}
 	function getDate(){return $this->date;}
-}?>
+}
