@@ -23,10 +23,15 @@ class Database{
 		return $posts;
 	}
 	public function addPost(Post $post){
-		$query=$this->handle->prepare('INSERT INTO posts (parent_id,message) VALUES (?,?);');
-		$query->bindValue(1,$post->getParent(),PDO::PARAM_INT);
-		$query->bindValue(2,$post->getMessage(),PDO::PARAM_STR);
-		$query->execute();
-		return $this->handle->lastInsertId();
+		if(!isset($_SESSION['last'])||$_SESSION['last']!=$post->getMessage()){
+			$query=$this->handle->prepare('INSERT INTO posts (parent_id,message) VALUES (?,?);');
+			$query->bindValue(1,$post->getParent(),PDO::PARAM_INT);
+			$query->bindValue(2,$post->getMessage(),PDO::PARAM_STR);
+			$query->execute();
+			$_SESSION['last']=$post->getMessage();
+			return $this->handle->lastInsertId();
+		}
+		else
+			throw new Exception("You are trying to submit a post multiple times", 105);	
 	}
 }
