@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="forum">
-	<?php require_once('forum.php');new Forum();?>
+	<?php require_once('tinybbs.php');?>
 	</div>
 </body>
 </html>

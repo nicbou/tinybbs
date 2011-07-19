@@ -1,9 +1,4 @@
 <?php
-session_start();
-function handleErr($no,$msg,$file,$line){echo("<div class='err'>".htmlentities("$msg in $file ($line)")."</div>");return true;}
-function handleEx($ex){echo("<div class='ex'>".htmlentities($ex->getMessage())."</div>");return true;}
-set_error_handler('handleErr');
-set_exception_handler('handleEx');
 require_once('db.php');
 require_once('post.php');
 class Forum{

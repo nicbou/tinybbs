@@ -12,6 +12,5 @@ Features:
 
 To include the forum in a page, all you need to do is this:
 <?php
-	require_once('forum.php');
-	new Forum();
+	require('tinybbs.php');
 ?>
