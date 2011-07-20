@@ -1,5 +1,4 @@
 <?php
-try{session_start();}catch(Exception $ex){}
 function err($no,$msg,$file,$line){
 	echo("<div class='err'>".htmlentities("$msg in $file ($line)")."</div>");return true;
 }
