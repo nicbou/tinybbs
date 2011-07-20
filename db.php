@@ -1,5 +1,5 @@
 <?php
-class Database{
+class DB{
 	private static $instance;
 	private $handle;
 	private function __construct(){
@@ -23,15 +23,17 @@ class Database{
 		return $posts;
 	}
 	public function addPost(Post $post){
-		if(!isset($_SESSION['last'])||$_SESSION['last']!=$post->getMessage()){
+			$dupes=$this->handle->prepare("SELECT * FROM posts WHERE parent_id=? AND message=? LIMIT 20");
+			$dupes->bindValue(1,$post->getParent(),PDO::PARAM_INT);
+			$dupes->bindValue(2,$post->getMessage(),PDO::PARAM_STR);
+			$dupes->execute();
+			while($dupe=$dupes->fetchObject())
+				if($dupe->message==$post->getMessage())throw new Exception("Double posting is not allowed", 105);
 			$query=$this->handle->prepare('INSERT INTO posts (parent_id,message) VALUES (?,?);');
 			$query->bindValue(1,$post->getParent(),PDO::PARAM_INT);
 			$query->bindValue(2,$post->getMessage(),PDO::PARAM_STR);
 			$query->execute();
 			$_SESSION['last']=$post->getMessage();
-			return $this->handle->lastInsertId();
-		}
-		else
-			throw new Exception("You are trying to submit a post multiple times", 105);	
+			return $this->handle->lastInsertId();			
 	}
 }
