@@ -12,7 +12,7 @@ class Post {
 		if($date!=NULL)$this->setDate($date);
 	}
 	function save(){
-		return Database::getInstance()->addPost($this);
+		return DB::getInstance()->addPost($this);
 	}
 	function setParent($parent){
 		if(is_numeric($parent) && !is_float($parent) && $parent >=0)
