@@ -12,7 +12,7 @@ class Forum{
 	}
 	function make($parent=0){
 		if(is_numeric($parent) && !is_float($parent) && $parent>=0){
-			$out=($this->formatPosts($this->fetchSubposts($parent)));
+			$out=($this->formatPosts($this->getSubPosts($parent)));
 			return $this->makeReplyForm($parent).$out.$this->js;
 		}
 		else
@@ -35,16 +35,16 @@ class Forum{
 	private function makeReplyForm($id){
 		return "<form action='#$id' method='POST'><input type='hidden' name='parent' value='$id'/><textarea required name='msg'></textarea><input type='submit' value='Submit'/></form>";
 	}
-	private function fetchSubposts($parent=0){
+	private function getSubPosts($parent=0){
 		$node=array();
-		$posts=Database::getInstance()->fetchPosts($parent);
+		$posts=DB::getInstance()->fetchPosts($parent);
 		foreach($posts as $post){
 			$node[$post->getId()]['post']=$post;
-			$node[$post->getId()]['children']=$this->fetchSubposts($post->getId());
+			$node[$post->getId()]['children']=$this->getSubPosts($post->getId());
 		}
 		return $node;
 	}
 	function reply($msg,$parent=0){
-		Database::getInstance()->addPost(new Post($msg,$parent));
+		DB::getInstance()->addPost(new Post($msg,$parent));
 	}
 }
