@@ -23,8 +23,10 @@ class Forum{
 			$output .='<li>
 			<a class="id" id="'.$post['post']->getId().'"></a>
 			<p>'.htmlentities($post['post']->getMessage(),ENT_NOQUOTES,"UTF-8").'</p>'
-			.$this->makeReplyForm($post['post']->getId()).
-			'<a href=\'?id='.$post['post']->getParent().'#'.$post['post']->getId().'\'>Permalink</a><a onclick="reply(this)">Reply</a>'
+			.$this->makeReplyForm($post['post']->getId())
+			.'<span class="date">'.date('M j, Y',$post['post']->getDate()).'</span>
+			<a href=\'?id='.$post['post']->getParent().'#'.$post['post']->getId().'\'>Permalink</a>
+			<a onclick="reply(this)">Reply</a>'
 			.$this->formatPosts($post['children'])
 			."</li>";
 		}
