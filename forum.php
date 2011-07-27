@@ -3,7 +3,6 @@ require_once('db.php');
 require_once('post.php');
 class Forum{
 	private $parent=0;
-	private $js='<script>document.forms[0].style.display="block";function reply(parent){var forms=parent.parentNode.getElementsByTagName("form");forms[0].style.display="block";parent.style.display="none";}</script>';
 	function __construct($echo=1,$id=0,$newreply=NULL){
 		$this->parent=isset($_GET['id'])&&is_numeric($_GET['id'])&&!is_float($_GET['id'])&&$_GET['id']>=0?$_GET['id']:0;
 		if(isset($_POST['msg'])&&isset($_POST['parent']))
@@ -13,7 +12,7 @@ class Forum{
 	function make($parent=0){
 		if(is_numeric($parent) && !is_float($parent) && $parent>=0){
 			$out=($this->formatPosts($this->getSubPosts($parent)));
-			return $this->makeReplyForm($parent).$out.$this->js;
+			return $this->makeReplyForm($parent).$out;
 		}
 		else
 			throw new Exception('Invalid parent thread specified', 102);
