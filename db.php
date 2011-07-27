@@ -1,9 +1,12 @@
 <?php
+define('DB','tinybbs');
+define('USER','root');
+define('PASS','');
 class DB{
 	private static $inst;
 	private $handle;
 	private function __construct(){
-		$this->handle=new PDO('mysql:host=localhost;port=3306;dbname=tinybbs','root','');
+		$this->handle=new PDO('mysql:host=localhost;port=3306;dbname='.DB,USER,PASS);
 		$this->handle->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 	}
 	public static function getInstance(){
