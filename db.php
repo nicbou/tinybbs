@@ -1,15 +1,15 @@
 <?php
 class DB{
-	private static $instance;
+	private static $inst;
 	private $handle;
 	private function __construct(){
 		$this->handle=new PDO('mysql:host=localhost;port=3306;dbname=tinybbs','root','');
-		$this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$this->handle->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 	}
 	public static function getInstance(){
-		if (is_null(self::$instance))
-			self::$instance=new self();
-		return self::$instance;
+		if (is_null(self::$inst))
+			self::$inst=new self();
+		return self::$inst;
 	}
 	public function getHandle(){return $this->handle;}
 	public function fetchPosts($parent=0){
