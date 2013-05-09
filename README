@@ -1,8 +1,7 @@
 TinyBBS by Nicolas Bouliane
 
 TinyBBS is an tiny object-oriented forum. The challenge was to build a fully
-working forum in under 150 lines of code. The product was 5kb in weight and keeps
-improving while trying to stay as small as possible.
+working forum in under 150 lines of code. The product is 5kb in weight.
 
 Features:
 
